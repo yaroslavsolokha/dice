@@ -1,3 +1,4 @@
+import 'package:dice/dice.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -13,13 +14,13 @@ class DiceRoller extends StatefulWidget {
 }
 
 class _DiceRollerState extends State<DiceRoller> {
-  var currentDiceRoll1 = randomizer.nextInt(6) + 1;
-  var currentDiceRoll2 = randomizer.nextInt(6) + 1;
+  var dice1 = const Dice(0);
+  var dice2 = const Dice(0);
 
   void rollDice() {
     setState(() {
-      currentDiceRoll1 = randomizer.nextInt(6) + 1;
-      currentDiceRoll2 = randomizer.nextInt(6) + 1;
+      dice1 = Dice(randomizer.nextInt(6) + 1);
+      dice2 = Dice(randomizer.nextInt(6) + 1);
     });
   }
 
@@ -28,17 +29,11 @@ class _DiceRollerState extends State<DiceRoller> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          'assets/images/dice-$currentDiceRoll1.png',
-          width: 300,
-        ),
+        dice1,
         const SizedBox(
           height: 20,
         ),
-        Image.asset(
-          'assets/images/dice-$currentDiceRoll2.png',
-          width: 300,
-        ),
+        dice2,
         const SizedBox(
           height: 20,
         ),
@@ -47,7 +42,7 @@ class _DiceRollerState extends State<DiceRoller> {
           style: TextButton.styleFrom(
               foregroundColor: Colors.white,
               textStyle: const TextStyle(fontSize: 28)),
-          child: const Text('Roll dice'),
+          child: const Text('Click Me'),
         )
       ],
     );
